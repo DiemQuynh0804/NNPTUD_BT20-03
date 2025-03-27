@@ -47,6 +47,12 @@ app.use(function(err, req, res, next) {
   // render the error page
   CreateErrorRes(res,err.status||500,err)
 });
+
+app.use((req, res, next) => {
+  req.user = { role: "mod" }; // Hoặc "admin" để test quyền xóa
+  next();
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
